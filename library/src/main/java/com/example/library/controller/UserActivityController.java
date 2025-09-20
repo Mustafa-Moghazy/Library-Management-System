@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+import com.example.library.dto.UserActivityDTO;
 import com.example.library.entity.UserActivity;
 import com.example.library.service.UserActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +15,15 @@ public class UserActivityController {
 
     @Autowired
     private UserActivityService userActivityService;
-
-    // 🔹 Get all activities
     @GetMapping
-    public ResponseEntity<List<UserActivity>> getAllActivities() {
-        List<UserActivity> activities = userActivityService.findAll();
+    public ResponseEntity<List<UserActivityDTO>> getAllActivities() {
+        List<UserActivityDTO> activities = userActivityService.findAll();
         return ResponseEntity.ok(activities);
     }
 
-    // 🔹 Get activities by user ID
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<UserActivity>> getUserActivities(@PathVariable Long userId) {
-        List<UserActivity> activities = userActivityService.findAllByUserId(userId);
+    public ResponseEntity<List<UserActivityDTO>> getUserActivities(@PathVariable Long userId) {
+        List<UserActivityDTO> activities = userActivityService.findAllByUserId(userId);
         return ResponseEntity.ok(activities);
     }
 }
