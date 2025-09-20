@@ -94,5 +94,3 @@ The project demonstrates how to manage books, authors, publishers, categories, u
 
 ---
 
-## 🏗️ Project Structure
-
