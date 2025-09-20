@@ -94,3 +94,11 @@ The project demonstrates how to manage books, authors, publishers, categories, u
 
 ---
 
+## API Collection
+
+You can access the Postman collection for testing the API here:  
+[Open Postman Collection](https://www.postman.co/workspace/My-Workspace~6744731d-64e1-4393-80f3-d02516421b2b/collection/21139449-f140d6e9-486f-4f1e-882a-ab3829033dbc?action=share&creator=21139449)
+
+
+```
+
