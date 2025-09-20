@@ -1,5 +1,7 @@
 package com.example.library.controller;
 
+import com.example.library.dto.BookRequestDTO;
+import com.example.library.dto.BookResponseDTO;
 import com.example.library.entity.Author;
 import com.example.library.entity.Book;
 import com.example.library.service.BookService;
@@ -21,17 +23,17 @@ public class BookController {
     private BookService bookService;
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
+    public ResponseEntity<BookResponseDTO> createBook(@RequestBody BookRequestDTO book) {
         return ResponseEntity.ok(bookService.createBook(book));
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
+    public ResponseEntity<List<BookResponseDTO>> getAllBooks() {
         return ResponseEntity.ok(bookService.findAll());
     }
 
     @GetMapping("/page")
-    public ResponseEntity<Page<Book>> getBooksPage(
+    public ResponseEntity<Page<BookResponseDTO>> getBooksPage(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortBy) {
@@ -40,33 +42,33 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+    public ResponseEntity<BookResponseDTO> getBookById(@PathVariable Long id) {
         return bookService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + id));
     }
 
     @GetMapping("/title/{title}")
-    public ResponseEntity<Book> getBookByTitle(@PathVariable String title) {
+    public ResponseEntity<BookResponseDTO> getBookByTitle(@PathVariable String title) {
         return bookService.findByTitle(title)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new RuntimeException("Book not found with title: " + title));
     }
 
     @GetMapping("/isbn/{isbn}")
-    public ResponseEntity<Book> getBookByIsbn(@PathVariable int isbn) {
+    public ResponseEntity<BookResponseDTO> getBookByIsbn(@PathVariable int isbn) {
         return bookService.findByIsbn(isbn)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> new RuntimeException("Book not found with ISBN: " + isbn));
     }
 
     @GetMapping("/publisher/{publisherName}")
-    public ResponseEntity<List<Book>> getBooksByPublisher(@PathVariable String publisherName) {
+    public ResponseEntity<List<BookResponseDTO>> getBooksByPublisher(@PathVariable String publisherName) {
         return ResponseEntity.ok(bookService.findByPublisherName(publisherName));
     }
 
     @GetMapping("/author/{authorName}")
-    public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable String authorName) {
+    public ResponseEntity<List<BookResponseDTO>> getBooksByAuthor(@PathVariable String authorName) {
         return ResponseEntity.ok(bookService.findByAuthorName(authorName));
     }
 
@@ -76,7 +78,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+    public ResponseEntity<BookResponseDTO> updateBook(@PathVariable Long id, @RequestBody BookRequestDTO book) {
         return ResponseEntity.ok(bookService.update(id, book));
     }
 

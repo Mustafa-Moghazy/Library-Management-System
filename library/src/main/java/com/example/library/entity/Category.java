@@ -11,10 +11,19 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String categoryName;
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private List<Book> books;
+
+    public Category(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Category() {
+
+    }
 
     public Long getId() {
         return id;

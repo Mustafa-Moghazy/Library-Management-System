@@ -1,42 +1,21 @@
-package com.example.library.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import com.example.library.entity.Category;
+package com.example.library.dto;
 
 import java.util.List;
 
-@Entity
-@Table(name = "books")
-public class Book {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BookResponseDTO {
     private Long id;
-    @Column(unique = true, nullable = false)
     private String title;
     private String language;
     private String edition;
     private String summary;
     private String coverImg;
-    @Column(unique = true, nullable = false)
     private int isbn;
     private int publicationYear;
     private int totalCopies;
     private int currentCopies;
-    @ManyToMany
-    @JoinTable(
-            name = "book_authors",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
-    private List<Author> authors;
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher publisher;
+    private List<String> authors;
+    private String categoryName;
+    private String publisherName;
 
     public Long getId() {
         return id;
@@ -118,27 +97,27 @@ public class Book {
         this.currentCopies = currentCopies;
     }
 
-    public List<Author> getAuthors() {
+    public List<String> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(List<String> authors) {
         this.authors = authors;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public String getPublisherName() {
+        return publisherName;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
     }
 }

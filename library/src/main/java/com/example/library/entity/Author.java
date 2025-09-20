@@ -11,10 +11,19 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String authorName;
     @ManyToMany(mappedBy = "authors")
     @JsonIgnore
     private List<Book> books;
+
+    public Author(String name) {
+        this.authorName = name;
+    }
+
+    public Author() {
+
+    }
 
     public Long getId() {
         return id;

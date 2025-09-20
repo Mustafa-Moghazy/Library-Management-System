@@ -11,10 +11,18 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true, nullable = false)
     private String publisherName;
     @OneToMany(mappedBy = "publisher")
     @JsonIgnore
     private List<Book> books;
+
+    public Publisher(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
+    public Publisher() {
+    }
 
     public Long getId() {
         return id;
